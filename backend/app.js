@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: "http://localhost:8000",
+    // origin: "http://localhost:8000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     optionSuccessStatus: 200,
