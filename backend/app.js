@@ -41,7 +41,7 @@ app.use(bodyParser.json());
 // cors
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Origin", "http://localhost:8000");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
@@ -60,7 +60,7 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:8000",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     optionSuccessStatus: 200,
