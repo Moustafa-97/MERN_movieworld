@@ -26,7 +26,6 @@ const {
   top_rated,
 } = require("./controllers/UserControl");
 
-
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
 mongoose
@@ -42,7 +41,7 @@ app.use(bodyParser.json());
 // cors
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "http://localhost:3000");
+  res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
@@ -61,7 +60,7 @@ app.use((req, res, next) => {
 
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     optionSuccessStatus: 200,
@@ -76,7 +75,7 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
   app.get("*", (req, res) => {
     res.sendFile(
-      path.resolve(__dirname,"frontendmovieclient", "build", "index.html")
+      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
     );
   });
 } else {
