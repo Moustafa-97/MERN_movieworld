@@ -60,7 +60,7 @@ app.use(bodyParser.json());
 
 app.use(
   cors({
-    origin: "http://localhost:8000",
+    origin: "https://ourmovieworld.onrender.com",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
     optionSuccessStatus: 200,
