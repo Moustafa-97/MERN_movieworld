@@ -13,6 +13,7 @@ const {
   user_post_signup,
   user_post_login,
 } = require("./controllers/AuthControl");
+// const io = require("socket.io")(server);
 const {
   add_remove_wishlist,
   user_search,
@@ -25,6 +26,22 @@ const {
   series_page,
   top_rated,
 } = require("./controllers/UserControl");
+
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve("../");
+  app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
+  app.get("*", (req, res, next) => {
+    res.sendFile(
+      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
+    );
+    next();
+  });
+} else {
+  app.get("/", (req, res, next) => {
+    res.send("server is ready");
+    next();
+  });
+}
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
@@ -69,20 +86,6 @@ app.use(
   })
 );
 app.use(cookieParser());
-
-if (process.env.NODE_ENV === "production") {
-  const __dirname = path.resolve("../");
-  app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
-  app.get("*", (req, res) => {
-    res.sendFile(
-      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
-    );
-  });
-} else {
-  app.get("/", (req, res) => {
-    res.send("server is ready");
-  });
-}
 
 const PORT = process.env.PORT || 8000;
 
