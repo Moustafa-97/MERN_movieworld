@@ -54,26 +54,7 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-// responsible to frontend connect
-// cors
 
-// app.use((req, res, next) => {
-//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:8000/Trending");
-//   res.setHeader(
-//     "Access-Control-Allow-Methods",
-//     "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
-//   );
-//   res.setHeader(
-//     "Access-Control-Allow-Headers",
-//     "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
-//   );
-//   res.setHeader("Access-Control-Allow-Credentials", true);
-//   res.setHeader("Access-Control-Allow-Private-Network", true);
-//   //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
-//   res.setHeader("Access-Control-Max-Age", 7200);
-
-//   next();
-// });
 
 app.use(
   cors({
@@ -95,34 +76,64 @@ mongoose.set("strictQuery", false);
 // mvc
 // login singup
 app.post("/signup", user_post_signup);
-app.get("/signup", (req,res)=>{
-  res.sendFile(__dirname + "/frontendmovieclient/build/index.html")
+app.get("/signup", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
 });
 app.post("/login", user_post_login);
-
+app.get("/login", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
 // search
 app.post("/search", user_search);
-
+app.get("/search", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
 // menu wush wash
 app.post("/Wishlist", get_wishlist_watched_elements);
 app.post("/Watched", get_wishlist_watched_elements);
-
+app.get("/Wishlist", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
+app.get("/Watched", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
 // discover page
 app.post("/Discover", discover_page);
 app.post("/Top", top_rated);
+app.get("/Discover", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
+app.get("/Top", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
 
 // home page section and popular page
 app.post("/Popular", movie_page_popular);
+app.get("/Popular", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
 
 // home page section
 app.post("/Trending", trending_page);
+app.get("/Trending", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
 
 // details
 app.post("/Moviedetails", movie_detail);
+app.get("/Moviedetails", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
 
 // add and remove operation
 app.put("/AddRemoveWatch", add_remove_watched);
 app.put("/AddRemoveWish", add_remove_wishlist);
+app.get("/AddRemoveWatch", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
+app.get("/AddRemoveWish", (req, res) => {
+  res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
+});
 
 // series section (plan to do...)
 // app.post("/Series", series_page);
@@ -131,7 +142,31 @@ app.put("/AddRemoveWish", add_remove_wishlist);
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-// app.listen(PORT);
-
 // set Routes
 // app.use("/auth", require("./routes/UserRoutes"));
+
+
+
+
+// comments
+
+// responsible to frontend connect
+// cors
+
+// app.use((req, res, next) => {
+//   res.setHeader("Access-Control-Allow-Origin", "http://localhost:8000/Trending");
+//   res.setHeader(
+//     "Access-Control-Allow-Methods",
+//     "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
+//   );
+//   res.setHeader(
+//     "Access-Control-Allow-Headers",
+//     "Content-Type, Authorization, X-Content-Type-Options, Accept, X-Requested-With, Origin, Access-Control-Request-Method, Access-Control-Request-Headers"
+//   );
+//   res.setHeader("Access-Control-Allow-Credentials", true);
+//   res.setHeader("Access-Control-Allow-Private-Network", true);
+//   //  Firefox caps this at 24 hours (86400 seconds). Chromium (starting in v76) caps at 2 hours (7200 seconds). The default value is 5 seconds.
+//   res.setHeader("Access-Control-Max-Age", 7200);
+
+//   next();
+// });
