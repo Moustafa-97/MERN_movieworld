@@ -75,62 +75,62 @@ mongoose.set("strictQuery", false);
 // login singup
 app.post("/signup", user_post_signup);
 app.get("/signup", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 app.post("/login", user_post_login);
 app.get("/login", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 // search
 app.post("/search", user_search);
 app.get("/search", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 // menu wush wash
 app.post("/Wishlist", get_wishlist_watched_elements);
 app.post("/Watched", get_wishlist_watched_elements);
 app.get("/Wishlist", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 app.get("/Watched", (req, res) => {
-  res.sendFile(_path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(_path.join(__dirname + "/frontendmovieclient/build"));
 });
 // discover page
 app.post("/Discover", discover_page);
 app.post("/Top", top_rated);
 app.get("/Discover", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 app.get("/Top", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 
 // home page section and popular page
 app.post("/Popular", movie_page_popular);
 app.get("/Popular", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 
 // home page section
 app.post("/Trending", trending_page);
 app.get("/Trending", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 
 // details
 app.post("/Moviedetails", movie_detail);
 app.get("/Moviedetails", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 
 // add and remove operation
 app.put("/AddRemoveWatch", add_remove_watched);
 app.put("/AddRemoveWish", add_remove_wishlist);
 app.get("/AddRemoveWatch", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 app.get("/AddRemoveWish", (req, res) => {
-  res.sendFile(path.join(__dirname + "/frontendmovieclient/build/index.html"));
+  res.sendFile(path.join(__dirname + "/frontendmovieclient/build"));
 });
 
 // series section (plan to do...)
