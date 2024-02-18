@@ -97,8 +97,6 @@ mongoose.set("strictQuery", false);
 app.post("/signup", user_post_signup);
 app.get("/signup", (req, res) => {
   res.sendFile(__dirname + "/frontendmovieclient/build/index.html");
-
-
 });
 app.post("/login", user_post_login);
 
