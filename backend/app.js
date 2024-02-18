@@ -30,7 +30,7 @@ const {
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve("../");
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
-  app.get("/", (req, res, next) => {
+  app.get("*", (req, res, next) => {
     res.sendFile(
       path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
     );
