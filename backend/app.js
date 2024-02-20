@@ -77,22 +77,7 @@ app.use(
 );
 app.use(cookieParser());
 
-if (process.env.NODE_ENV === "production") {
-  const __dirname = path.resolve("../");
-  app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
-  app.get("*", (req, res, next) => {
-    res.sendFile(
-      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
-    );
 
-    next();
-  });
-} else {
-  app.get("/", (req, res, next) => {
-    res.send("server is ready");
-    next();
-  });
-}
 
 const PORT = process.env.PORT || 8000;
 
@@ -132,6 +117,23 @@ app.put("/AddRemoveWish", add_remove_wishlist);
 // app.post("/Series", series_page);
 
 // still not mvc
+
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve("../");
+  app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
+  app.get("*", (req, res, next) => {
+    res.sendFile(
+      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
+    );
+
+    next();
+  });
+} else {
+  app.get("/", (req, res, next) => {
+    res.send("server is ready");
+    next();
+  });
+}
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
