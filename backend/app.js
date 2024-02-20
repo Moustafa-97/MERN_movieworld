@@ -32,7 +32,8 @@ app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
 
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve("../");
-  app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
+  // app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
+  app.use(express.static("/frontendmovieclient/build"));
   app.get("/*", (req, res, next) => {
     res.sendFile(
       path.resolve(__dirname, "/frontendmovieclient/build", "index.html")
@@ -46,7 +47,6 @@ if (process.env.NODE_ENV === "production") {
     next();
   });
 }
-
 
 mongoose
   .connect(process.env.MONGODB_URL)
