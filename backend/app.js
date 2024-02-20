@@ -38,6 +38,7 @@ if (process.env.NODE_ENV === "production") {
     next();
   });
 
+  // test deploy
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
@@ -122,6 +123,16 @@ app.put("/AddRemoveWish", add_remove_wishlist);
 
 // still not mvc
 
+
+
+
+
+
+
+app.listen(PORT, () => console.log(`Listening on ${PORT}`));
+
+
+
 // test deployment
 
 } else {
@@ -130,12 +141,6 @@ app.put("/AddRemoveWish", add_remove_wishlist);
     next();
   });
 }
-
-
-
-
-app.listen(PORT, () => console.log(`Listening on ${PORT}`));
-
 // app.listen(PORT);
 
 // set Routes
