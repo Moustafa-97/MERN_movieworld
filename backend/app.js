@@ -101,6 +101,11 @@ mongoose.set("strictQuery", false);
 // mvc
 // login singup
 app.post("/signup", user_post_signup);
+app.get("/signup", (req,res)=>{
+  res.sendFile(
+    "../frontendmovieclient/build/index.html"
+  )
+});
 app.post("/login", user_post_login);
 
 // search
