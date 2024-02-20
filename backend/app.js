@@ -25,15 +25,17 @@ const {
   get_wishlist_watched_elements,
   series_page,
   top_rated,
-} = require("./controllers/UserControl"); 
+} = require("./controllers/UserControl");
 
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
 
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve("../");
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
   app.get("/*", (req, res, next) => {
     res.sendFile(
-      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
+      path.resolve(__dirname, "/frontendmovieclient/build", "index.html")
     );
 
     next();
@@ -45,8 +47,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
+
 mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => console.log("connected"))
@@ -56,15 +57,14 @@ mongoose
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
-
-
-
-
 // responsible to frontend connect
 // cors
 
 app.use((req, res, next) => {
-  res.setHeader("Access-Control-Allow-Origin", "https://ourmovieworld.onrender.com");
+  res.setHeader(
+    "Access-Control-Allow-Origin",
+    "https://ourmovieworld.onrender.com"
+  );
   res.setHeader(
     "Access-Control-Allow-Methods",
     "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS,CONNECT,TRACE"
@@ -92,8 +92,6 @@ app.use(
   })
 );
 app.use(cookieParser());
-
-
 
 const PORT = process.env.PORT || 8000;
 
@@ -133,8 +131,6 @@ app.put("/AddRemoveWish", add_remove_wishlist);
 // app.post("/Series", series_page);
 
 // still not mvc
-
-
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
