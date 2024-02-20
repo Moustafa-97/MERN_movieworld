@@ -30,10 +30,10 @@ const {
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve("../");
   // app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
-  app.use(express.static("/frontendmovieclient/build"))
+  app.use(express.static("../frontendmovieclient/build"));
   app.get("*", (req, res, next) => {
     res.sendFile(
-      path.resolve(__dirname, "/frontendmovieclient/build/index.html")
+      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
     );
 
     next();
@@ -128,16 +128,7 @@ app.put("/AddRemoveWish", add_remove_wishlist);
 
 // still not mvc
 
-
-
-
-
-
-
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
-
-
-
 
 // app.listen(PORT);
 
