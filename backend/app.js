@@ -27,23 +27,7 @@ const {
   top_rated,
 } = require("./controllers/UserControl");
 
-if (process.env.NODE_ENV === "production") {
-  const __dirname = path.resolve("../");
-  // app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
-  app.use(express.static("../frontendmovieclient/build"));
-  app.get("*", (req, res, next) => {
-    res.sendFile(
-      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
-    );
 
-    next();
-  });
-} else {
-  app.get("/", (req, res, next) => {
-    res.send("server is ready");
-    next();
-  });
-}
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
@@ -55,6 +39,10 @@ mongoose
 // Set up body-parser middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
+
+
+
+
 
 // responsible to frontend connect
 // cors
@@ -88,6 +76,23 @@ app.use(
   })
 );
 app.use(cookieParser());
+
+if (process.env.NODE_ENV === "production") {
+  const __dirname = path.resolve("../");
+  app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
+  app.get("*", (req, res, next) => {
+    res.sendFile(
+      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
+    );
+
+    next();
+  });
+} else {
+  app.get("/", (req, res, next) => {
+    res.send("server is ready");
+    next();
+  });
+}
 
 const PORT = process.env.PORT || 8000;
 
