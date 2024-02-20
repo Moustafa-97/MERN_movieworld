@@ -37,18 +37,7 @@ if (process.env.NODE_ENV === "production") {
 
     next();
   });
-  app.get("/signup", (req, res, next) => {
-    res.sendFile(
-      path.resolve(__dirname, "frontendmovieclient", "build", "index.html")
-    );
-    next();
-  });
-} else {
-  app.get("/", (req, res, next) => {
-    res.send("server is ready");
-    next();
-  });
-}
+
 
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
@@ -132,6 +121,18 @@ app.put("/AddRemoveWish", add_remove_wishlist);
 // app.post("/Series", series_page);
 
 // still not mvc
+
+// test deployment
+
+} else {
+  app.get("/", (req, res, next) => {
+    res.send("server is ready");
+    next();
+  });
+}
+
+
+
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
