@@ -33,15 +33,15 @@ app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve("../");
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
-  app.get("/", (req, res, next) => {
-    console.log(req);
-    res.sendFile(
-      path.join(__dirname, "frontendmovieclient", "build", "index.html")
-    );
+  // app.get("/", (req, res, next) => {
+  //   console.log(req);
+  //   res.sendFile(
+  //     path.join(__dirname, "frontendmovieclient", "build", "index.html")
+  //   );
 
-    next();
-    // return;
-  });
+  //   next();
+  //   // return;
+  // });
   app.get("/signup", (req, res, next) => {
     console.log(req);
     res.sendFile(
