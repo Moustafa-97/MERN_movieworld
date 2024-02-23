@@ -28,10 +28,6 @@ const {
 } = require("./controllers/UserControl");
 
 const __dirname = path.resolve();
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
-
-// if (process.env.NODE_ENV === "production") {
 app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
 app.get("*", (req, res, next) => {
   res.sendFile(
@@ -47,6 +43,10 @@ app.get("*", (req, res, next) => {
 //   next();
 // });
 // }
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
+
+// if (process.env.NODE_ENV === "production") {
 
 mongoose
   .connect(process.env.MONGODB_URL)
@@ -135,7 +135,6 @@ app.put("/AddRemoveWish", add_remove_wishlist);
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
-return;
 // app.listen(PORT);
 
 // set Routes
