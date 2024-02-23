@@ -27,25 +27,25 @@ const {
   top_rated,
 } = require("./controllers/UserControl");
 
+const __dirname = path.resolve();
 app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
 
 // if (process.env.NODE_ENV === "production") {
-  const __dirname = path.resolve();
-  app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
-  app.get("*", (req, res, next) => {
-    res.sendFile(
-      path.join(__dirname, "frontendmovieclient", "build", "index.html")
-    );
-    // console.log("**");
-    next();
-  });
-  // console.log("*");
+app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
+app.get("*", (req, res, next) => {
+  res.sendFile(
+    path.join(__dirname, "frontendmovieclient", "build", "index.html")
+  );
+  // console.log("**");
+  next();
+});
+// console.log("*");
 // } else {
-  // app.get("/", (req, res, next) => {
-  //   res.send("server is ready");
-  //   next();
-  // });
+// app.get("/", (req, res, next) => {
+//   res.send("server is ready");
+//   next();
+// });
 // }
 
 mongoose
