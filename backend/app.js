@@ -27,7 +27,7 @@ const {
   top_rated,
 } = require("./controllers/UserControl");
 
-const __dirname = path.resolve();
+var __dirname = path.resolve();
 app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
 app.get("*", (req, res, next) => {
   res.sendFile(
