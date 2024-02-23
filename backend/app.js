@@ -28,8 +28,8 @@ const {
 } = require("./controllers/UserControl");
 
 if (process.env.NODE_ENV === "production") {
-  const __dirname = path.resolve("../");
-  app.use(express.static(path.join(__dirname + "frontendmovieclient/build")));
+  const __dirname = path.resolve("/");
+  app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
   app.get("*", (req, res, next) => {
     res.sendFile(
       path.join(__dirname, "frontendmovieclient", "build", "index.html")
