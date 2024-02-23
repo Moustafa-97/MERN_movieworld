@@ -35,7 +35,12 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
   app.get("/*", (req, res, next) => {
     res.sendFile(
-      path.resolve(__dirname, "frontendmovieclient/build", "index.html")
+      path.join(__dirname, "frontendmovieclient", "build", "index.html"),
+      function (err) {
+        if (err) {
+          res.status(500).send(err);
+        }
+      }
     );
 
     next();
