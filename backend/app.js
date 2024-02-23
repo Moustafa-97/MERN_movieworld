@@ -38,9 +38,10 @@ if (process.env.NODE_ENV === "production") {
     res.sendFile(
       path.join(__dirname, "frontendmovieclient", "build", "index.html")
     );
-
+console.log("**");
     next();
   });
+  console.log("*");
   return;
 } else {
   app.get("/", (req, res, next) => {
