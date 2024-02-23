@@ -34,21 +34,18 @@ if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve("../");
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
   app.get("/*", (req, res, next) => {
-    console.log(req);
     res.sendFile(
       path.join(__dirname, "frontendmovieclient", "build", "index.html")
     );
-console.log("**");
+    console.log("**");
     next();
   });
   console.log("*");
-  return;
 } else {
   app.get("/", (req, res, next) => {
     res.send("server is ready");
     next();
   });
-  return;
 }
 
 mongoose
@@ -138,6 +135,7 @@ app.put("/AddRemoveWish", add_remove_wishlist);
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
+return;
 // app.listen(PORT);
 
 // set Routes
