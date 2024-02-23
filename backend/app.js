@@ -32,7 +32,7 @@ app.use(express.json({ limit: "10mb" }));
 app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
 
 // if (process.env.NODE_ENV === "production") {
-  var __dirname = path.resolve();
+  var __dirname = path.resolve("../");
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
   app.get("*", (req, res, next) => {
     res.sendFile(
