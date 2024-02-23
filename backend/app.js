@@ -33,29 +33,21 @@ app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve("../");
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
-  // app.get("/", (req, res, next) => {
-  //   console.log(req);
-  //   res.sendFile(
-  //     path.join(__dirname, "frontendmovieclient", "build", "index.html")
-  //   );
-
-  //   next();
-  //   // return;
-  // });
-  app.get("/signup", (req, res, next) => {
+  app.get("/*", (req, res, next) => {
     console.log(req);
     res.sendFile(
       path.join(__dirname, "frontendmovieclient", "build", "index.html")
     );
 
     next();
-    // return;
   });
+  return;
 } else {
   app.get("/", (req, res, next) => {
     res.send("server is ready");
     next();
   });
+  return;
 }
 
 mongoose
