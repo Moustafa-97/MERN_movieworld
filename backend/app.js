@@ -27,8 +27,12 @@ const {
   top_rated,
 } = require("./controllers/UserControl");
 
-if (process.env.NODE_ENV === "production") {
-  const __dirname = path.resolve("/");
+
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
+
+// if (process.env.NODE_ENV === "production") {
+  var __dirname = path.resolve();
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
   app.get("*", (req, res, next) => {
     res.sendFile(
@@ -38,14 +42,13 @@ if (process.env.NODE_ENV === "production") {
     next();
   });
   // console.log("*");
-} else {
-  app.get("/", (req, res, next) => {
-    res.send("server is ready");
-    next();
-  });
-}
-app.use(express.json({ limit: "10mb" }));
-app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
+// } else {
+  // app.get("/", (req, res, next) => {
+  //   res.send("server is ready");
+  //   next();
+  // });
+// }
+
 
 mongoose
   .connect(process.env.MONGODB_URL)
