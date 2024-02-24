@@ -6,14 +6,12 @@ const process = require("process");
 const dotenv = require("dotenv").config();
 const bodyParser = require("body-parser");
 const app = express();
-// const { theUser } = require("./models/User");
 const cookieParser = require("cookie-parser");
 const server = require("http").createServer();
 const {
   user_post_signup,
   user_post_login,
 } = require("./controllers/AuthControl");
-// const io = require("socket.io")(server);
 const {
   add_remove_wishlist,
   user_search,
@@ -52,8 +50,6 @@ if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve("../");
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
 
-  // test refresh
-
   // mvc
   // login singup
   app.post("/signup", user_post_signup);
@@ -90,20 +86,11 @@ if (process.env.NODE_ENV === "production") {
   // still not mvc, but will be in the future
 
   app.get("*", (req, res, next) => {
-    // if (req.url === "/*") {
-      return res.sendFile(
-        path.join(__dirname, "frontendmovieclient", "build", "index.html")
-      );
-      // next();
-    // }
+    return res.sendFile(
+      path.join(__dirname, "frontendmovieclient", "build", "index.html")
+    );
   });
 }
-// else {
-// app.get("/", (req, res, next) => {
-//   res.send("server is ready");
-//   next();
-// });
-// }
 
 mongoose
   .connect(process.env.MONGODB_URL)
