@@ -91,10 +91,10 @@ if (process.env.NODE_ENV === "production") {
 
   app.on("request", (req, res, next) => {
     if (req.url === "*") {
-      res.sendFile(
+      return res.sendFile(
         path.join(__dirname, "frontendmovieclient", "build", "index.html")
       );
-      next();
+      // next();
     }
   });
 }
