@@ -90,12 +90,12 @@ if (process.env.NODE_ENV === "production") {
   // still not mvc, but will be in the future
 
   app.get("*", (req, res, next) => {
-    if (req.url === "/*") {
+    // if (req.url === "/*") {
       return res.sendFile(
         path.join(__dirname, "frontendmovieclient", "build", "index.html")
       );
       // next();
-    }
+    // }
   });
 }
 // else {
