@@ -27,19 +27,63 @@ const {
   top_rated,
 } = require("./controllers/UserControl");
 
-app.use(express.json({ limit: "10mb" }));
+const PORT = process.env.PORT || 8000;
+app.use(express.json({ limit: "100mb" }));
 app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
 
-// if (process.env.NODE_ENV === "production") {
-var __dirname = path.resolve("../");
-app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
-app.get("*", (req, res, next) => {
-  res.sendFile(
-    path.join(__dirname, "frontendmovieclient", "build", "index.html")
-  );
-  next();
-});
-// } else {
+// Set up body-parser middleware
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+if (process.env.NODE_ENV === "production") {
+  var __dirname = path.resolve("../");
+  app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
+
+  // test refresh
+
+  // mvc
+  // login singup
+  app.post("/signup", user_post_signup);
+
+  app.post("/login", user_post_login);
+
+  // search
+  app.post("/search", user_search);
+
+  // menu wush wash
+  app.post("/Wishlist", get_wishlist_watched_elements);
+  app.post("/Watched", get_wishlist_watched_elements);
+
+  // discover page
+  app.post("/Discover", discover_page);
+  app.post("/Top", top_rated);
+
+  // home page section and popular page
+  app.post("/Popular", movie_page_popular);
+
+  // home page section
+  app.post("/Trending", trending_page);
+
+  // details
+  app.post("/Moviedetails", movie_detail);
+
+  // add and remove operation
+  app.put("/AddRemoveWatch", add_remove_watched);
+  app.put("/AddRemoveWish", add_remove_wishlist);
+
+  // series section (plan to do...)
+  // app.post("/Series", series_page);
+
+  // still not mvc, but will be in the future
+
+  app.get("*", (req, res, next) => {
+    res.sendFile(
+      path.join(__dirname, "frontendmovieclient", "build", "index.html")
+    );
+    next();
+  });
+}
+// else {
 // app.get("/", (req, res, next) => {
 //   res.send("server is ready");
 //   next();
@@ -50,10 +94,6 @@ mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => console.log("connected"))
   .catch((err) => console.log(err));
-
-// Set up body-parser middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.json());
 
 // responsible to frontend connect
 // cors
@@ -91,45 +131,8 @@ app.use(
 );
 app.use(cookieParser());
 
-const PORT = process.env.PORT || 8000;
-
 // mongo setup
 mongoose.set("strictQuery", false);
-
-// mvc
-// login singup
-app.post("/signup", user_post_signup);
-
-app.post("/login", user_post_login);
-
-// search
-app.post("/search", user_search);
-
-// menu wush wash
-app.post("/Wishlist", get_wishlist_watched_elements);
-app.post("/Watched", get_wishlist_watched_elements);
-
-// discover page
-app.post("/Discover", discover_page);
-app.post("/Top", top_rated);
-
-// home page section and popular page
-app.post("/Popular", movie_page_popular);
-
-// home page section
-app.post("/Trending", trending_page);
-
-// details
-app.post("/Moviedetails", movie_detail);
-
-// add and remove operation
-app.put("/AddRemoveWatch", add_remove_watched);
-app.put("/AddRemoveWish", add_remove_wishlist);
-
-// series section (plan to do...)
-// app.post("/Series", series_page);
-
-// still not mvc
 
 app.listen(PORT, () => console.log(`Listening on ${PORT}`));
 
