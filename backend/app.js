@@ -48,7 +48,6 @@ app.use(
   })
 );
 
-
 if (process.env.NODE_ENV === "production") {
   const __dirname = path.resolve("../");
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
@@ -90,11 +89,13 @@ if (process.env.NODE_ENV === "production") {
 
   // still not mvc, but will be in the future
 
-  app.get("*", (req, res, next) => {
-    res.sendFile(
-      path.join(__dirname, "frontendmovieclient", "build", "index.html")
-    );
-    next();
+  app.on("request", (req, res, next) => {
+    if (req.url === "*") {
+      res.sendFile(
+        path.join(__dirname, "frontendmovieclient", "build", "index.html")
+      );
+      next();
+    }
   });
 }
 // else {
@@ -108,8 +109,6 @@ mongoose
   .connect(process.env.MONGODB_URL)
   .then(() => console.log("connected"))
   .catch((err) => console.log(err));
-
-
 
 // app.use((req, res, next) => {
 //   res.setHeader(
@@ -131,7 +130,6 @@ mongoose
 
 //   next();
 // });
-
 
 app.use(cookieParser());
 
