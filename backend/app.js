@@ -35,8 +35,22 @@ app.use(express.urlencoded({ extended: true, parameterLimit: 50000 }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
+// responsible to frontend connect
+// cors
+app.use(
+  cors({
+    origin: "https://ourmovieworld.onrender.com",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    optionSuccessStatus: 200,
+    // for cookies::
+    credentials: true,
+  })
+);
+
+
 if (process.env.NODE_ENV === "production") {
-  var __dirname = path.resolve("../");
+  const __dirname = path.resolve("../");
   app.use(express.static(path.join(__dirname + "/frontendmovieclient/build")));
 
   // test refresh
@@ -95,8 +109,7 @@ mongoose
   .then(() => console.log("connected"))
   .catch((err) => console.log(err));
 
-// responsible to frontend connect
-// cors
+
 
 // app.use((req, res, next) => {
 //   res.setHeader(
@@ -119,16 +132,7 @@ mongoose
 //   next();
 // });
 
-app.use(
-  cors({
-    origin: "https://ourmovieworld.onrender.com",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type", "Authorization"],
-    optionSuccessStatus: 200,
-    // for cookies::
-    credentials: true,
-  })
-);
+
 app.use(cookieParser());
 
 // mongo setup
