@@ -161,8 +161,9 @@ module.exports.add_remove_wishlist = async (req, res, next) => {
           _id: id,
         });
         res.status(200).json({
-          message: "removed",
-          data: user.wishlist,
+          message: "removed from wishlist",
+          data: user,
+          state: true,
         });
 
         return;
@@ -171,7 +172,9 @@ module.exports.add_remove_wishlist = async (req, res, next) => {
         const user = await theUser.findById({
           _id: id,
         });
-        res.status(200).json({ message: "added", data: user.wishlist });
+        res
+          .status(200)
+          .json({ message: "added to wishlist", data: user, state: true });
 
         return;
       }
@@ -219,8 +222,9 @@ module.exports.add_remove_watched = async (req, res) => {
             _id: id,
           });
           res.status(200).json({
-            message: "removed",
-            data: user.watched,
+            message: "removed from watched list",
+            data: user,
+            state: true,
           });
         } catch (err) {
           console.log(err);
@@ -233,7 +237,11 @@ module.exports.add_remove_watched = async (req, res) => {
           const user = await theUser.findById({
             _id: id,
           });
-          res.status(200).json({ message: "added", data: user.watched });
+          res.status(200).json({
+            message: "added to watched list",
+            data: user,
+            state: true,
+          });
         } catch (err) {
           console.log(err);
         }
