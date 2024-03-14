@@ -11,6 +11,7 @@ const server = require("http").createServer();
 const {
   user_post_signup,
   user_post_login,
+  user_refresh,
 } = require("./controllers/AuthControl");
 const {
   add_remove_wishlist,
@@ -23,6 +24,7 @@ const {
   get_wishlist_watched_elements,
   series_page,
   top_rated,
+  update_profile,
 } = require("./controllers/UserControl");
 
 const PORT = process.env.PORT || 8000;
@@ -80,6 +82,10 @@ if (process.env.NODE_ENV === "production") {
   // add and remove operation
   app.put("/AddRemoveWatch", add_remove_watched);
   app.put("/AddRemoveWish", add_remove_wishlist);
+
+  // update profile
+  app.put("/UpdateProfile", update_profile);
+  app.post("/refresh", user_refresh);
 
   // series section (plan to do...)
   // app.post("/Series", series_page);

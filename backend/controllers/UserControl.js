@@ -272,6 +272,41 @@ module.exports.user_search = (req, res) => {
     .catch((err) => console.error("error:" + err));
 };
 
+// profile:
+
+module.exports.update_profile = async (req, res, next) => {
+  const { newData, id } = req.body;
+  if (!id) {
+    res.send({ message: "please login", state: false });
+  } else {
+    const result = theUser.findById({ _id: id });
+    try {
+      const { firstName, lastName, image } = result;
+      await theUser.findOneAndUpdate(
+        { _id: id },
+        {
+          firstName:
+            newData.firstName.length !== "" ? newData.firstName : firstName,
+          lastName:
+            newData.lastName.length !== "" ? newData.lastName : lastName,
+          image: newData.image.length > 0 ? newData.image : image,
+        }
+      );
+      const user = await theUser.findById({
+        _id: id,
+      });
+      res.status(200).json({
+        message: "Changed",
+        data: user,
+        state: true,
+      });
+      return;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+};
+
 // // series (to do...)....
 // module.exports.series_page = (req, res) => {
 //   const url = `https://api.themoviedb.org/3/tv/popular?language=en-US&page=${req.body.page}`;

@@ -1,3 +1,4 @@
+const { log } = require("console");
 const { theUser } = require("../models/User");
 // const createToken = require("jsonwebtoken");
 const jwt = require("jsonwebtoken");
@@ -80,4 +81,18 @@ module.exports.user_post_login = async (req, res, next) => {
     res.status(401).json({ message: "err", status: true });
   }
   next();
+};
+
+module.exports.user_refresh = async (req, res) => {
+  const  id  = await req.body.token;
+  if (id) {
+    const userData = await theUser.findById({ _id: id });
+    try {
+      res.status(200).json({data:userData})
+      // const {firstName,lastName,image,email,_id}= userData;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+  // console.log(userData._id);
 };
